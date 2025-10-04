@@ -17,7 +17,12 @@ export const HomePage = () => {
     hasSearchValue,
     handleSearch,
     loadMore,
+    error, 
   } = useMovies();
+
+  const isEmptySearch = !hasSearchValue;
+  const isLoadingNoResults = loading && movies.length === 0;
+  const isNoResults = !loading && movies.length === 0 && hasSearchValue;
 
   return (
     <div>
@@ -29,11 +34,13 @@ export const HomePage = () => {
       />
 
       <div className="search-content">
-        {!hasSearchValue ? (
+        {error ? (
+          <p className="text-red-500 text-center mt-4">{error}</p>
+        ) : isEmptySearch ? (
           <Empty description="Search for a movie" />
-        ) : loading && movies.length === 0 ? (
+        ) : isLoadingNoResults ? (
           <Loader />
-        ) : !loading && movies.length === 0 ? (
+        ) : isNoResults ? (
           <Empty description="No movies found" />
         ) : (
           <InfiniteScroll
@@ -43,13 +50,7 @@ export const HomePage = () => {
             loader={<Loader />}
             style={{ overflow: "visible" }}
           >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-                gap: "1rem",
-              }}
-            >
+            <div className="movie-grid">
               {movies.map((movie) => (
                 <MovieCard
                   key={movie.imdbID}

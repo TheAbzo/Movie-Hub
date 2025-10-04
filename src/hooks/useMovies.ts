@@ -10,9 +10,9 @@ export const useMovies = () => {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [hasSearchValue, setHasSearchValue] = useState(false);
+  const [error, setError] = useState("");
 
   const [restored, setRestored] = useState(false);
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,12 +25,13 @@ export const useMovies = () => {
       setHasSearchValue(true);
       setRestored(true); // skip first debounce
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchMovies = async (searchQuery: string, newPage = 1) => {
     if (!searchQuery) return;
     setLoading(true);
+    setError(""); 
     try {
       const data = await searchMovies(searchQuery, newPage);
       if (data.Response === "True") {
@@ -46,11 +47,16 @@ export const useMovies = () => {
       } else {
         setMovies([]);
         setHasMore(false);
+        setError(data.Error || "No movies found");
       }
     } catch (err) {
       console.error(err);
+      setError("Failed to fetch movies");
+      setMovies([]);
+      setHasMore(false);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const clearSearch = () => {
@@ -59,6 +65,7 @@ export const useMovies = () => {
     setQuery("");
     setPage(1);
     setHasMore(true);
+    setError("");
     navigate(".", { replace: true, state: {} });
   };
 
@@ -80,23 +87,23 @@ export const useMovies = () => {
     fetchMovies(query, nextPage);
   };
 
-  // Debounce search on typing, including empty query case
+  // Debounce search on typing
   useEffect(() => {
     if (restored) {
-      setRestored(false); // skip first run after restore
+      setRestored(false);//skip first run after restore
       return;
     }
 
     const delayDebounce = setTimeout(() => {
       if (query.trim() === "") {
-        clearSearch(); // handle backspace-to-empty
+        clearSearch(); // handle backspace to empty
       } else {
         handleSearch(query);
       }
     }, 500);
 
     return () => clearTimeout(delayDebounce);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return {
@@ -109,6 +116,7 @@ export const useMovies = () => {
     loading,
     hasMore,
     hasSearchValue,
+    error,
     handleSearch,
     loadMore,
   };
