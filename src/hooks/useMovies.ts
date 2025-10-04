@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MovieSummary } from "../types/movie";
 import { searchMovies } from "../services/api";
 
@@ -10,16 +11,29 @@ export const useMovies = () => {
   const [loading, setLoading] = useState(false);
   const [hasSearchValue, setHasSearchValue] = useState(false);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.state?.movies) {
+      console.log(location.state, "restoring state");
+      setMovies(location.state.movies);
+      setQuery(location.state.query);
+      setPage(location.state.page);
+      setHasSearchValue(true);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const fetchMovies = async (searchQuery: string, newPage = 1) => {
     if (!searchQuery) return;
     setLoading(true);
     try {
       const data = await searchMovies(searchQuery, newPage);
       if (data.Response === "True") {
-        const newMovies = newPage === 1 ? data.Search : [...movies, ...data.Search];
+        const newMovies =
+          newPage === 1 ? data.Search : [...movies, ...data.Search];
         setMovies(newMovies);
-
-        // use totalResults to know when to stop
         setHasMore(newMovies.length < parseInt(data.totalResults, 10));
       } else {
         setMovies([]);
@@ -35,8 +49,13 @@ export const useMovies = () => {
     if (!value) {
       setHasSearchValue(false);
       setMovies([]);
+      setQuery("");
+      setPage(1);
+      setHasMore(true);
+      navigate(".", { replace: true, state: {} });
       return;
     }
+
     setQuery(value);
     setPage(1);
     fetchMovies(value, 1);
@@ -49,5 +68,17 @@ export const useMovies = () => {
     fetchMovies(query, nextPage);
   };
 
-  return { movies, loading, hasMore, hasSearchValue, handleSearch, loadMore };
+  return {
+    movies,
+    setMovies,
+    query,
+    setQuery,
+    page,
+    setPage,
+    loading,
+    hasMore,
+    hasSearchValue,
+    handleSearch,
+    loadMore,
+  };
 };

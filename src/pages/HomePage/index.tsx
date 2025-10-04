@@ -6,12 +6,29 @@ import { useMovies } from "../../hooks/useMovies";
 import { MovieCard } from "../../components/MovieCard/MovieCard";
 import "./style.scss";
 
+
 export const HomePage = () => {
-  const { movies, loading, hasMore, hasSearchValue, handleSearch, loadMore } = useMovies();
+  const {
+    movies,
+    query,
+    setQuery,
+    page,
+    loading,
+    hasMore,
+    hasSearchValue,
+    handleSearch,
+    loadMore,
+  } = useMovies();
+
 
   return (
     <div>
-      <SearchBar className="movie-search" onSearch={handleSearch} />
+     <SearchBar
+  className="movie-search"
+  value={query}
+  onChange={setQuery}
+  onSearch={handleSearch}
+/>
 
       <div className="search-content">
         {!hasSearchValue ? (
@@ -36,7 +53,13 @@ export const HomePage = () => {
               }}
             >
               {movies.map((movie) => (
-                <MovieCard key={movie.imdbID} movie={movie} />
+                <MovieCard
+                  key={movie.imdbID}
+                  movie={movie}
+                  movies={movies}
+                  query={query}
+                  page={page}
+                />
               ))}
             </div>
           </InfiniteScroll>

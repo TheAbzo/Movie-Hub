@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { MovieDetails as MovieDetailsType } from "../../types/movie";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { getMovieDetails } from "../../services/api";
@@ -9,6 +9,11 @@ import { Button } from "antd";
 export const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // 👇 movies/query/page will be here if we navigated from Home
+  const { movies, query, page } = (location.state ) || {};
+
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);
   const [error, setError] = useState("");
 
@@ -44,7 +49,14 @@ export const MovieDetails = () => {
         </div>
       </div>
 
-      <Button className="primary-btn" onClick={() => navigate(-1)}>
+      <Button
+        className="primary-btn"
+        onClick={() =>
+          navigate("/", {
+            state: { movies, query, page }, 
+          })
+        }
+      >
         ← Back
       </Button>
     </div>
