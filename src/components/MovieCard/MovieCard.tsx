@@ -1,12 +1,10 @@
 import { MovieSummary } from "../../types/movie";
 import { Link } from "react-router-dom";
-import './style.scss';
+import "./style.scss";
 
 export const MovieCard = ({ movie }: { movie: MovieSummary }) => (
-  <Link to={`/movie/${movie.imdbID}`}   className="block cursor-pointer no-underline text-inherit"
->
+  <Link to={`/movie/${movie.imdbID}`} className="block cursor-pointer no-underline text-inherit">
     <div className=" movie-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex flex-col h-96">
-      
       <div className="h-[80%]">
         <img
           src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.png"}
@@ -27,7 +25,6 @@ export const MovieCard = ({ movie }: { movie: MovieSummary }) => (
           </span>
         </div>
       </div>
-
     </div>
   </Link>
 );

@@ -1,29 +1,26 @@
-.movie-card{
-    --tw-duration: 300ms;
-    transition-duration: 300ms;
-    background-color: #d4d4d4;
-    border-radius: 6px;
-        width: 232px;
-    height: 380px;
-    .movie-title{
-      color: #111827;
+.movie-card {
+  --tw-duration: 300ms;
+  transition-duration: 300ms;
+  background-color: #d4d4d4;
+  border-radius: 6px;
+  width: 232px;
+  height: 380px;
+  .movie-title {
+    color: #111827;
     padding-left: 12px;
     padding-top: 12px;
     white-space: nowrap;
     overflow: hidden;
     width: 212px;
     text-overflow: ellipsis;
+  }
+
+  .movie-card-footer {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    .movie-rating {
+      height: 30px;
+    }
+  }
 }
-
-    .movie-card-footer{
-            padding-left: 12px;
-padding-right:12px;
-
-.movie-rating{
-        height: 30px;
-}
-}
-}
-
-
-

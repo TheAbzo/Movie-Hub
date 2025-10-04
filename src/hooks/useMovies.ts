@@ -10,35 +10,32 @@ export const useMovies = () => {
   const [loading, setLoading] = useState(false);
   const [hasSearchValue, setHasSearchValue] = useState(false);
 
-
-
   const fetchMovies = async (searchQuery: string, newPage = 1) => {
-  if (!searchQuery) return;
-  setLoading(true);
-  try {
-    const data = await searchMovies(searchQuery, newPage);
-    if (data.Response === "True") {
-      const newMovies = newPage === 1 ? data.Search : [...movies, ...data.Search];
-      setMovies(newMovies);
+    if (!searchQuery) return;
+    setLoading(true);
+    try {
+      const data = await searchMovies(searchQuery, newPage);
+      if (data.Response === "True") {
+        const newMovies = newPage === 1 ? data.Search : [...movies, ...data.Search];
+        setMovies(newMovies);
 
-      // use totalResults to know when to stop
-      setHasMore(newMovies.length < parseInt(data.totalResults, 10));
-    } else {
-      setMovies([]);
-      setHasMore(false);
+        // use totalResults to know when to stop
+        setHasMore(newMovies.length < parseInt(data.totalResults, 10));
+      } else {
+        setMovies([]);
+        setHasMore(false);
+      }
+    } catch (err) {
+      console.error(err);
     }
-  } catch (err) {
-    console.error(err);
-  }
-  setLoading(false);
-};
-
+    setLoading(false);
+  };
 
   const handleSearch = (value: string) => {
-    if(!value) {
+    if (!value) {
       setHasSearchValue(false);
       setMovies([]);
-      return; 
+      return;
     }
     setQuery(value);
     setPage(1);

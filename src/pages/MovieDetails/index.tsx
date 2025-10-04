@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { MovieDetails as MovieDetailsType } from "../../types/movie";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { getMovieDetails } from "../../services/api";
-import './style.scss';
+import "./style.scss";
 import { Button } from "antd";
 
 export const MovieDetails = () => {
@@ -31,15 +31,21 @@ export const MovieDetails = () => {
         <img src={movie.Poster} alt={movie.Title} className="rounded " />
         <div className="movie-details">
           <h1 className="text-2xl font-bold">{movie.Title}</h1>
-          <p><strong>Year:</strong> {movie.Year}</p>
-          <p><strong>Genre:</strong> {movie.Genre}</p>
-          <p><strong>Director:</strong> {movie.Director}</p>
+          <p>
+            <strong>Year:</strong> {movie.Year}
+          </p>
+          <p>
+            <strong>Genre:</strong> {movie.Genre}
+          </p>
+          <p>
+            <strong>Director:</strong> {movie.Director}
+          </p>
           <p className="mt-2">{movie.Plot}</p>
         </div>
       </div>
 
-      <Button className="primary-btn"  onClick={() => navigate(-1)} >
-         ← Back
+      <Button className="primary-btn" onClick={() => navigate(-1)}>
+        ← Back
       </Button>
     </div>
   );

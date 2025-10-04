@@ -3,22 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --color-primary-bg: #F3F4F6;       /* App background */
-  --color-secondary-bg: #E5E7EB;     /* Card background */
-  --color-text: #111827;             /* Default font color */
+  --color-primary-bg: #f3f4f6; /* App background */
+  --color-secondary-bg: #e5e7eb; /* Card background */
+  --color-text: #111827; /* Default font color */
 
-  --color-primary-btn: #3B82F6;      /* Primary button background */
-  --color-primary-btn-hover: #2563EB;/* Primary button hover */
-  
-  --color-secondary-btn: #9CA3AF;    /* Secondary button background */
-  --color-secondary-btn-hover: #6B7280; /* Secondary button hover */
+  --color-primary-btn: #3b82f6; /* Primary button background */
+  --color-primary-btn-hover: #2563eb; /* Primary button hover */
+
+  --color-secondary-btn: #9ca3af; /* Secondary button background */
+  --color-secondary-btn-hover: #6b7280; /* Secondary button hover */
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: var(--color-primary-bg); 
+  background-color: var(--color-primary-bg);
 }
 
 .btn-primary {

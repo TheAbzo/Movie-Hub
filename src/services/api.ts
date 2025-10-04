@@ -4,10 +4,7 @@ import { ErrorResponse, MovieDetailsResponse, SearchResponse } from "../types/mo
 const API_KEY = import.meta.env.VITE_OMDB_KEY;
 const BASE_URL = "https://www.omdbapi.com/";
 
-export const searchMovies = async (
-  query: string,
-  page = 1
-): Promise<SearchResponse> => {
+export const searchMovies = async (query: string, page = 1): Promise<SearchResponse> => {
   const response = await axios.get<SearchResponse>(BASE_URL, {
     params: { s: query, page, apikey: API_KEY },
   });

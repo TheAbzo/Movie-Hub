@@ -2,15 +2,15 @@ import { Input } from "antd";
 
 const { Search } = Input;
 
-type Props =  {
+type Props = {
   onSearch: (value: string) => void;
   className: string;
-}
+};
 
 export const SearchBar = ({ onSearch, className }: Props) => {
   return (
     <Search
-      className= {className}
+      className={className}
       placeholder="Search movies..."
       allowClear
       enterButton="Search"
