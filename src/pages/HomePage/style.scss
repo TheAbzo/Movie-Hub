@@ -10,3 +10,17 @@
 .search-content {
   margin: 0px 7rem;
 }
+
+.error-message-style{
+  margin: 30%;
+    width: 50%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: var(--color-secondary-bg);
+    color: var(--color-alert);
+    border: none;
+    padding: 50px;
+    border-radius: var(--radius-default);
+}

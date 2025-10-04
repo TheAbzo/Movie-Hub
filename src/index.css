@@ -12,6 +12,11 @@
 
   --color-secondary-btn: #9ca3af; /* Secondary button background */
   --color-secondary-btn-hover: #6b7280; /* Secondary button hover */
+
+  --radius-default: 6px;
+  --color-alert: #ef4444; /* Tailwind red-500 */
+  --color-alert-bg: #fee2e2; /* light background for alert */
+  --color-alert-border: #fca5a5; /* border red-300 */
 }
 
 html,

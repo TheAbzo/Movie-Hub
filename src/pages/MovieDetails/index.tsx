@@ -11,7 +11,6 @@ export const MovieDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 👇 movies/query/page will be here if we navigated from Home
   const { movies, query, page } = location.state || {};
 
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);

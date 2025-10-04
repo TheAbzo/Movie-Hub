@@ -4,6 +4,7 @@ export type MovieSummary = {
   Year: string;
   Poster: string;
   Type: string;
+  imdbRating?: string;
 };
 
 export type SearchResponse = {

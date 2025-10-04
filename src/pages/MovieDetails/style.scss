@@ -3,13 +3,16 @@
     justify-content: center;
     align-items: center;
     display: flex;
+
     img {
       padding: 42px;
-      border-radius: 6px;
+      border-radius: var(--radius-default); 
     }
+
     .movie-details {
       p {
         max-width: 50%;
+        color: var(--color-text); 
       }
     }
   }
@@ -18,5 +21,6 @@
     align-items: center;
     justify-content: center;
     margin-left: 25%;
+    border-radius: var(--radius-default);
   }
 }

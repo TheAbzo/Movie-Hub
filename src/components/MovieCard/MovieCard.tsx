@@ -4,9 +4,9 @@ import "./style.scss";
 
 type Props = {
   movie: MovieSummary;
-  movies: MovieSummary[];
-  query: string;
-  page: number;
+  movies?: MovieSummary[];
+  query?: string;
+  page?: number;
 };
 
 export const MovieCard = ({ movie, movies, query, page }: Props) => {
@@ -36,7 +36,7 @@ export const MovieCard = ({ movie, movies, query, page }: Props) => {
           <div className="movie-card-footer flex justify-between items-center text-sm text-gray-600">
             <p>{movie.Year}</p>
             <span className=" movie-rate bg-yellow-400 text-gray-900 font-bold px-2 py-1 rounded">
-              ⭐ 7.5
+              ⭐ {movie.imdbRating || "N/A"}
             </span>
           </div>
         </div>
