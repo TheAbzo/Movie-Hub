@@ -1,15 +1,12 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { MovieDetails } from "./pages/MovieDetails";
+import { HomePage } from "./pages/HomePage";
 
-import './App.css'
-
-function App() {
-
-  return (
-    <>
-   <h1 className="text-3xl font-bold underline text-blue-500">
-  Vite + React + Tailwind
-</h1>
-    </>
-  )
-}
-
-export default App
+export const App = () => (
+  <Router>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/movie/:id" element={<MovieDetails />} />
+    </Routes>
+  </Router>
+);
