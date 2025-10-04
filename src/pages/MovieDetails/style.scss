@@ -1,8 +1,8 @@
 .details-wrapper {
   .content-details {
-    justify-content: center;
-    align-items: center;
     display: flex;
+    align-items: center;
+    justify-content: center;
 
     img {
       padding: 42px;
@@ -10,17 +10,37 @@
     }
 
     .movie-details {
+      max-width: 500px;
       p {
-        max-width: 50%;
+        max-width: 60%;
         color: var(--color-text);
+      }
+    }
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        max-width: 300px;
+        padding: 20px 0;
+        height: 400px;
+      }
+
+      .movie-details {
+        width: 100%;
+        max-width: 90%;
+        text-align: center;
+        p {
+          max-width: 100%;
+        }
       }
     }
   }
 
   button {
-    align-items: center;
-    justify-content: center;
-    margin-left: 25%;
     border-radius: var(--radius-default);
+    margin-top: 1rem; 
   }
 }

@@ -46,7 +46,7 @@ export const HomePage = () => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, 240px)",
+                gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
                 gap: "1rem",
               }}
             >

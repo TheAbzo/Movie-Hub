@@ -4,7 +4,7 @@ import { MovieDetails as MovieDetailsType } from "../../types/movie";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { getMovieDetails } from "../../services/api";
 import "./style.scss";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 
 export const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,29 +27,23 @@ export const MovieDetails = () => {
   }, [id]);
 
   if (error) return <ErrorMessage message={error} />;
-  if (!movie) return <p>Loading...</p>;
+  if (!movie) return <Spin size="large" className="flex justify-center mt-10" />;
 
   return (
     <div className="details-wrapper max-w-3xl mx-auto p-4">
-      <div className="content-details grid md:grid-cols-2 gap-6">
-        <img src={movie.Poster} alt={movie.Title} className="rounded " />
-        <div className="movie-details">
-          <h1 className="text-2xl font-bold">{movie.Title}</h1>
-          <p>
-            <strong>Year:</strong> {movie.Year}
-          </p>
-          <p>
-            <strong>Genre:</strong> {movie.Genre}
-          </p>
-          <p>
-            <strong>Director:</strong> {movie.Director}
-          </p>
-          <p className="mt-2">{movie.Plot}</p>
-        </div>
-      </div>
+    <div className="content-details grid md:grid-cols-2 gap-6 items-start">
+  <img src={movie.Poster} alt={movie.Title} className="rounded" />
+  <div className="movie-details">
+    <h1 className="text-2xl font-bold">{movie.Title}</h1>
+    <p><strong>Year:</strong> {movie.Year}</p>
+    <p><strong>Genre:</strong> {movie.Genre}</p>
+    <p><strong>Director:</strong> {movie.Director}</p>
+    <p className="mt-2">{movie.Plot}</p>
+  </div>
+</div>
 
       <Button
-        className="primary-btn"
+        className="primary-btn mt-6 flex mx-auto"
         onClick={() =>
           navigate("/", {
             state: { movies, query, page },
