@@ -3,7 +3,7 @@ import { MovieCard } from "./MovieCard/MovieCard";
 
 type Props = {
   movies: MovieSummary[];
-}
+};
 
 export const MovieList = ({ movies }: Props) => (
   <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
