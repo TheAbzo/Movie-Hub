@@ -25,13 +25,13 @@ export const useMovies = () => {
       setHasSearchValue(true);
       setRestored(true); // skip first debounce
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchMovies = async (searchQuery: string, newPage = 1) => {
     if (!searchQuery) return;
     setLoading(true);
-    setError(""); 
+    setError("");
     try {
       const data = await searchMovies(searchQuery, newPage);
       if (data.Response === "True") {
@@ -90,7 +90,7 @@ export const useMovies = () => {
   // Debounce search on typing
   useEffect(() => {
     if (restored) {
-      setRestored(false);//skip first run after restore
+      setRestored(false); //skip first run after restore
       return;
     }
 
@@ -103,7 +103,7 @@ export const useMovies = () => {
     }, 500);
 
     return () => clearTimeout(delayDebounce);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return {

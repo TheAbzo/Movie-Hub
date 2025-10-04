@@ -17,7 +17,7 @@ export const HomePage = () => {
     hasSearchValue,
     handleSearch,
     loadMore,
-    error, 
+    error,
   } = useMovies();
 
   const isEmptySearch = !hasSearchValue;

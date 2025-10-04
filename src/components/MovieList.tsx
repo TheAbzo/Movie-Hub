@@ -6,7 +6,7 @@ type Props = {
 };
 
 export const MovieList = ({ movies }: Props) => (
-<div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(232px,1fr))]">
+  <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(232px,1fr))]">
     {movies.map((m) => (
       <MovieCard key={m.imdbID} movie={m} />
     ))}
