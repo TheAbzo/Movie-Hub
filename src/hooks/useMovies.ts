@@ -8,6 +8,7 @@ export const useMovies = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [hasSearchValue, setHasSearchValue] = useState(false);
 
 
 
@@ -34,9 +35,15 @@ export const useMovies = () => {
 
 
   const handleSearch = (value: string) => {
+    if(!value) {
+      setHasSearchValue(false);
+      setMovies([]);
+      return; 
+    }
     setQuery(value);
     setPage(1);
     fetchMovies(value, 1);
+    setHasSearchValue(true);
   };
 
   const loadMore = () => {
@@ -45,5 +52,5 @@ export const useMovies = () => {
     fetchMovies(query, nextPage);
   };
 
-  return { movies, loading, hasMore, handleSearch, loadMore };
+  return { movies, loading, hasMore, hasSearchValue, handleSearch, loadMore };
 };

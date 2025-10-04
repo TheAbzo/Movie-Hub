@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-primary-bg: #F3F4F6;       /* App background */
+  --color-secondary-bg: #E5E7EB;     /* Card background */
+  --color-text: #111827;             /* Default font color */
+
+  --color-primary-btn: #3B82F6;      /* Primary button background */
+  --color-primary-btn-hover: #2563EB;/* Primary button hover */
+  
+  --color-secondary-btn: #9CA3AF;    /* Secondary button background */
+  --color-secondary-btn-hover: #6B7280; /* Secondary button hover */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--color-primary-bg); 
+}
+
+.btn-primary {
+  background-color: var(--color-primary-btn);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-btn-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary-btn);
+  color: var(--color-text);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-btn-hover);
+}
