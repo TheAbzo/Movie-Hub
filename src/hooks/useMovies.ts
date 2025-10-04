@@ -11,18 +11,21 @@ export const useMovies = () => {
   const [loading, setLoading] = useState(false);
   const [hasSearchValue, setHasSearchValue] = useState(false);
 
+  const [restored, setRestored] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Restore state when navigating back
   useEffect(() => {
     if (location.state?.movies) {
-      console.log(location.state, "restoring state");
       setMovies(location.state.movies);
       setQuery(location.state.query);
       setPage(location.state.page);
       setHasSearchValue(true);
+      setRestored(true); // skip first debounce
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchMovies = async (searchQuery: string, newPage = 1) => {
@@ -31,10 +34,15 @@ export const useMovies = () => {
     try {
       const data = await searchMovies(searchQuery, newPage);
       if (data.Response === "True") {
-        const newMovies =
-          newPage === 1 ? data.Search : [...movies, ...data.Search];
+        const newMovies = newPage === 1 ? data.Search : [...movies, ...data.Search];
         setMovies(newMovies);
         setHasMore(newMovies.length < parseInt(data.totalResults, 10));
+
+        // persist state in navigation
+        navigate(".", {
+          replace: true,
+          state: { movies: newMovies, query: searchQuery, page: newPage },
+        });
       } else {
         setMovies([]);
         setHasMore(false);
@@ -45,14 +53,18 @@ export const useMovies = () => {
     setLoading(false);
   };
 
+  const clearSearch = () => {
+    setHasSearchValue(false);
+    setMovies([]);
+    setQuery("");
+    setPage(1);
+    setHasMore(true);
+    navigate(".", { replace: true, state: {} });
+  };
+
   const handleSearch = (value: string) => {
     if (!value) {
-      setHasSearchValue(false);
-      setMovies([]);
-      setQuery("");
-      setPage(1);
-      setHasMore(true);
-      navigate(".", { replace: true, state: {} });
+      clearSearch();
       return;
     }
 
@@ -67,6 +79,25 @@ export const useMovies = () => {
     setPage(nextPage);
     fetchMovies(query, nextPage);
   };
+
+  // Debounce search on typing, including empty query case
+  useEffect(() => {
+    if (restored) {
+      setRestored(false); // skip first run after restore
+      return;
+    }
+
+    const delayDebounce = setTimeout(() => {
+      if (query.trim() === "") {
+        clearSearch(); // handle backspace-to-empty
+      } else {
+        handleSearch(query);
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   return {
     movies,

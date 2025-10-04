@@ -6,7 +6,6 @@ import { useMovies } from "../../hooks/useMovies";
 import { MovieCard } from "../../components/MovieCard/MovieCard";
 import "./style.scss";
 
-
 export const HomePage = () => {
   const {
     movies,
@@ -20,15 +19,14 @@ export const HomePage = () => {
     loadMore,
   } = useMovies();
 
-
   return (
     <div>
-     <SearchBar
-  className="movie-search"
-  value={query}
-  onChange={setQuery}
-  onSearch={handleSearch}
-/>
+      <SearchBar
+        className="movie-search"
+        value={query}
+        onChange={setQuery}
+        onSearch={handleSearch}
+      />
 
       <div className="search-content">
         {!hasSearchValue ? (

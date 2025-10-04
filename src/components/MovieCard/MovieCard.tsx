@@ -4,9 +4,9 @@ import "./style.scss";
 
 type Props = {
   movie: MovieSummary;
-  movies: MovieSummary[];   
-  query: string;            
-  page: number;            
+  movies: MovieSummary[];
+  query: string;
+  page: number;
 };
 
 export const MovieCard = ({ movie, movies, query, page }: Props) => {
@@ -19,10 +19,7 @@ export const MovieCard = ({ movie, movies, query, page }: Props) => {
   };
 
   return (
-    <div
-      onClick={handleClick}
-      className="block cursor-pointer no-underline text-inherit"
-    >
+    <div onClick={handleClick} className="block cursor-pointer no-underline text-inherit">
       <div className=" movie-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex flex-col h-96">
         <div className="h-[80%]">
           <img

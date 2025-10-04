@@ -12,7 +12,7 @@ export const MovieDetails = () => {
   const location = useLocation();
 
   // 👇 movies/query/page will be here if we navigated from Home
-  const { movies, query, page } = (location.state ) || {};
+  const { movies, query, page } = location.state || {};
 
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);
   const [error, setError] = useState("");
@@ -53,7 +53,7 @@ export const MovieDetails = () => {
         className="primary-btn"
         onClick={() =>
           navigate("/", {
-            state: { movies, query, page }, 
+            state: { movies, query, page },
           })
         }
       >
