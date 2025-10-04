@@ -1,0 +1,24 @@
+.details-wrapper{.content-details{
+        justify-content: center;
+    align-items: center;
+    display: flex;
+    img{
+            padding: 42px;
+    border-radius: 6px;
+
+    }
+    .movie-details{
+        p{
+                max-width: 50%;
+        }
+    }
+}
+
+
+    button{
+            align-items: center;
+    justify-content: center;
+    margin-left: 25%;
+
+    }
+}
